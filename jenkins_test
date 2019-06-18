@@ -4,19 +4,19 @@ pipeline {
     
     stages {
         
-        stage('GIT PUll') { 
+        stage('SCM Checkout') { 
             steps {
                 dir('artifacts'){
-                    git url: 'https://github.com/edureka-git/DevOpsClassCodes.git'
+                    git url: 'https://github.com/juned/DevOpsClassCodes.git'
                 }
                 
             }
         }
-        stage('Test') { 
+        stage('Test Package') { 
             steps {
              echo "Testing"  
              dir('artifacts'){
-                withMaven(maven: 'mymaven') 
+                withMaven(maven: 'maven') 
                 {
                   sh 'mvn test'
                 } 
@@ -35,7 +35,7 @@ pipeline {
             steps {
              echo "Static code analysis"  
              dir('artifacts'){
-                withMaven(maven: 'mymaven') {
+                withMaven(maven: 'maven') {
                  // sh 'mvn sonar:sonar -Dsonar.projectKey=devops-casestudy -Dsonar.host.url=http://35.200.254.182:9000 -Dsonar.login=571a21bbd37e72fe471a9dd4f5953b9a226b6744'                 }
              } 
              
@@ -55,7 +55,7 @@ pipeline {
             }
         }
     }
-    stage('Build image') { 
+    stage('Build docker image') { 
         //agent { label 'docker' }
       steps {
              echo "Build the docker file"  
@@ -86,11 +86,11 @@ pipeline {
           
          success {  
              echo 'This will run only if successful'  
-             mail bcc: '', body: " Build Result : Success <br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8',  mimeType: 'text/html', replyTo: '', subject: "Success CI: Project name -> ${env.JOB_NAME}", to: "cpb.95.2012@gmail.com";  
+             mail bcc: '', body: " Build Result : Success <br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8',  mimeType: 'text/html', replyTo: '', subject: "Success CI: Project name -> ${env.JOB_NAME}", to: "jkhan6722@gmail.com";  
          }  
          failure {  
             echo " Sending mail with failure cause"
-            mail bcc: '', body: "Build Result : Failure<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: 'shobha.bhatnagar94@gmail.com', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "cpb.95.2012@gmail.com";  
+            mail bcc: '', body: "Build Result : Failure<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: 'jkhan6722@gmail.com', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "jkhan6722@gmail.com";  
 
          }  
      }   
