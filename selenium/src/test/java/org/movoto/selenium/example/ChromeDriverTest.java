@@ -20,9 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by haozuo on 3/22/16.
- */
+
 public class ChromeDriverTest {
 
     private String testUrl;
@@ -35,7 +33,7 @@ public class ChromeDriverTest {
                 "webdriver.chrome.driver",
                 "webdriver/chromedriver");
 
-        testUrl = "https://leftstick.github.io/";
+        testUrl = "http://devopsstuff.com";
 
         // Create a new instance of the Chrome driver
         // Notice that the remainder of the code relies on the interface,
