@@ -10,6 +10,7 @@ spec:
   type: LoadBalancer
   ports:
   - protocol: TCP
-    port: 80
-    nodePort: 31010
+    port: 80 # Container port
+    nodePort: 31010 # Host port
     targetPort: 8080
+    protocol: TCP

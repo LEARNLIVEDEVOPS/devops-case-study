@@ -11,6 +11,6 @@ spec:
     spec: 
       containers: 
       - name: addressbook-conatiner
-        image: juned/addressbook:10
+        image: juned/myapp:17
         ports:
         - containerPort: 8080
