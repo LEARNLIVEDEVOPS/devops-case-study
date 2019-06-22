@@ -17,9 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by haozuo on 3/22/16.
- */
 public class SafariTest {
 
     private String testUrl;
@@ -28,7 +25,7 @@ public class SafariTest {
     @Before
     public void prepare() {
 
-        testUrl = "https://leftstick.github.io/";
+        testUrl = "https://juned.github.io/";
 
         driver = new SafariDriver();
         driver.manage().window().maximize();
@@ -50,7 +47,7 @@ public class SafariTest {
                 (new WebDriverWait(driver, 5))
                         .until(new ExpectedCondition<Boolean>() {
                             public Boolean apply(WebDriver d) {
-                                return d.getTitle().equals("我眼中软件工程人员该有的常识");
+                                return d.getTitle().equals("Juned Khan");
                             }
                         })
         );

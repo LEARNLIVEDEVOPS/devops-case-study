@@ -33,7 +33,7 @@ public class ChromeDriverTest {
                 "webdriver.chrome.driver",
                 "webdriver/chromedriver");
 
-        testUrl = "http://devopsstuff.com";
+        testUrl = "https://juned.github.io/";
 
         // Create a new instance of the Chrome driver
         // Notice that the remainder of the code relies on the interface,
@@ -64,7 +64,7 @@ public class ChromeDriverTest {
                 (new WebDriverWait(driver, 5))
                         .until(new ExpectedCondition<Boolean>() {
                             public Boolean apply(WebDriver d) {
-                                return d.getTitle().equals("我眼中软件工程人员该有的常识");
+                                return d.getTitle().equals("Juned Khan");
                             }
                         })
         );
