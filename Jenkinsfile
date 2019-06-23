@@ -22,6 +22,7 @@ node{
    stage('JUnit Test'){
         /* Perform JUnit testing 
 	 * sh './gradlew check' */
+        archive "target/**/*"
 	junit '**/target/*-reports/TEST-*.xml'
    }
 
