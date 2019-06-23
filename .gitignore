@@ -3,9 +3,6 @@
 #maven
 target
 
-#mac
-.DS_Store
-
 # Package Files #
 *.jar
 *.war
@@ -14,3 +11,13 @@ target
 #idea
 .idea/
 selenium-chrome-example.iml
+
+# Build and test files
+*.log*
+*.lck
+
+# OS generated files
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
