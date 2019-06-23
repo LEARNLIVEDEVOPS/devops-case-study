@@ -44,6 +44,9 @@ pipeline {
         }
 
         stage ('Build Image') {
+            agent {
+                label docker
+            }
             steps {
                 echo "Build docker image"
                 script {
