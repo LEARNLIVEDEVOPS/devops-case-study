@@ -15,16 +15,18 @@ pipeline {
         stage ('package app') {
             steps {
                 /* Package Application using maven */
-                def mvnHome =  tool name: 'maven', type: 'maven'
-                sh "${mvnHome}/bin/mvn package"
+                withMaven(maven: 'maven') {
+                      sh "mvn package"
+                }
             }
         }
 
         stage ('test package') {
             steps {
                 /* test application using maven */
-                def mvnHome =  tool name: 'maven', type: 'maven'
-                sh "${mvnHome}/bin/mvn test"
+                withMaven(maven: 'maven') {
+                    sh "mvn test"
+                }
             }
         }
     }
