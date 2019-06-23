@@ -28,8 +28,16 @@ pipeline {
                 always {
                 /* Perform JUnit testing
                 * sh './gradlew check' */
-                    archive "target/**/*"
+                    archiveArtifacts "target/**/*"
                     junit '**/target/*-reports/TEST-*.xml'
+                }
+            }
+        }
+
+        stage ('sonarqube analysis') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                    sh 'mvn sonar:sonar'
                 }
             }
         }
