@@ -20,8 +20,9 @@ node{
    }
 
    stage('JUnit Test'){
-        /* Perform JUnit testing */
-	sh './gradlew check'
+        /* Perform JUnit testing 
+	 * sh './gradlew check' */
+	junit '**/target/*-reports/TEST-*.xml'
    }
 
    stage('SonarQube Analysis') {
