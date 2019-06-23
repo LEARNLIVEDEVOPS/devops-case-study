@@ -19,8 +19,8 @@ pipeline {
             }
             post {
                 always {
-                /* Perform JUnit testing
-                * sh './gradlew check' */
+                    /* Perform JUnit testing
+                    * sh './gradlew check' */
                     archiveArtifacts "target/**/*"
                     junit '**/target/*-reports/TEST-*.xml'
                 }
