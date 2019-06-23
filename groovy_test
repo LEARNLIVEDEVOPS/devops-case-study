@@ -12,7 +12,7 @@ pipeline {
             }
         }
 
-        stage ('test app') {
+        stage ('test package') {
             steps {
                 /* test application using maven */
                 sh 'mvn test'
@@ -26,26 +26,20 @@ pipeline {
                 }
             }
         }
-
-        stage ('compile & package') {
+        
+        stage ('package app') {
             steps {
                 /* Package Application using maven */
                 sh 'mvn package'
             }
         }
-
+        
         stage ('sonarqube analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
                     sh 'mvn sonar:sonar'
                 }
             }
-        }
-
-        stage ('build image') {
-            /* This builds the actual image; synonymous to
-            * docker build on the command line */
-            dockerImg = docker.build("juned/myapp")
         }
     }
 }
