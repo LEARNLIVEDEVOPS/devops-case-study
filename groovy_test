@@ -21,7 +21,7 @@ pipeline {
                 always {
                 /* Perform JUnit testing
                 * sh './gradlew check' */
-                    archiveArtifacts "target/**/*", fingerprint: true
+                    archiveArtifacts "target/**/*"
                     junit '**/target/*-reports/TEST-*.xml'
                 }
             }
@@ -45,9 +45,13 @@ pipeline {
         stage ('build image') {
 
             steps {
-                /* This builds the actual image; synonymous to
-                * docker build on the command line */
-                dockerImg = docker.build("juned/myapp")
+                echo "Build docker image"
+                script {
+                    /* This builds the actual image; synonymous to
+                    * docker build on the command line */
+                    dockerImg = docker.build("juned/myapp")
+                    echo dockerImg
+                }
             }
         }
     }
