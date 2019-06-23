@@ -15,7 +15,7 @@ pipeline {
         stage ('package app') {
             steps {
                 /* Package Application using maven */
-                mvn package
+                sh 'mvn package'
             }
         }
     }
