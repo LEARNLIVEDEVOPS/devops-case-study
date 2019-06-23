@@ -4,7 +4,8 @@ node{
 
    stage('Clone Repository'){
         /* Clone git Repository */
-        git 'https://github.com/juned/DevOpsClassCodes'
+        /* git 'https://github.com/juned/DevOpsClassCodes' */
+        checkout scm
    }
    stage('Compile-Package'){
         /* Get maven home path */
