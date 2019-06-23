@@ -1,6 +1,7 @@
 #!/bin/groovy
 
 def dockerImg
+def mvnHome =  tool name: 'maven', type: 'maven'
 
 pipeline {
     agent any
@@ -15,7 +16,14 @@ pipeline {
         stage ('package app') {
             steps {
                 /* Package Application using maven */
-                sh 'mvn package'
+                sh "${mvnHome}/bin/mvn package"
+            }
+        }
+
+        stage ('test package') {
+            steps {
+                /* test application using maven */
+                sh "${mvnHome}/bin/mvn test"
             }
         }
     }
