@@ -24,6 +24,14 @@ pipeline {
                 /* test application using maven */
                 sh 'mvn test'
             }
+            post {
+                always {
+                /* Perform JUnit testing
+                * sh './gradlew check' */
+                    archive "target/**/*"
+                    junit '**/target/*-reports/TEST-*.xml'
+                }
+            }
         }
     }
 }
