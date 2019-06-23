@@ -5,18 +5,18 @@ def dockerImg
 pipeline {
     agent any
     stages {
-        stage ('Clone Repo') {
+        stage ('clone repo') {
             steps {
                 /* Clone git Repository */
                 checkout scm
             }
-            post {
-                failure {
-                    echo " Sending mail with failure cause"
-                    mail bcc: '', body: "Build Status : Failure<br> Job Name: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: 'shobha.bhatnagar94@gmail.com', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "jkhan6722@gmail.com";  
-                }
+        }
+
+        stage ('package app') {
+            steps {
+                /* Package Application using maven */
+                mvn package
             }
         }
     }
 }
-
