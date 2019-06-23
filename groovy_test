@@ -5,14 +5,14 @@ def dockerImg
 pipeline {
     agent any
     stages {
-        stage ('clone repo') {
+        stage ('Clone Repo') {
             steps {
                 /* Clone git Repository */
                 checkout scm
             }
         }
 
-        stage ('test package') {
+        stage ('Test Package') {
             steps {
                 /* test application using maven */
                 sh 'mvn test'
@@ -27,14 +27,14 @@ pipeline {
             }
         }
 
-        stage ('compile & package') {
+        stage ('Compile & Package') {
             steps {
                 /* Package Application using maven */
                 sh 'mvn package'
             }
         }
 
-        stage ('sonarqube analysis') {
+        stage ('SonaQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
                     sh 'mvn sonar:sonar'
@@ -42,14 +42,28 @@ pipeline {
             }
         }
 
-        stage ('build image') {
-
+        stage ('Build Image') {
             steps {
                 echo "Build docker image"
                 script {
                     /* This builds the actual image; synonymous to
                     * docker build on the command line */
                     dockerImg = docker.build("juned/myapp")
+                }
+            }
+        }
+
+        stage ('Push Image') {
+            step {
+                echo "Push Image on DockerHub"
+                script {
+                    /* Finally, we'll push the image with two tags:
+                    * First, the incremental build number from Jenkins
+                    * Second, the 'latest' tag. */
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        dockerImg.push("${env.BUILD_NUMBER}")
+                        dockerImg.push("latest")
+                    }
                 }
             }
         }
