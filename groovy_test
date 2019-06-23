@@ -15,20 +15,15 @@ pipeline {
         stage ('package app') {
             steps {
                 /* Package Application using maven */
-                withMaven(maven: 'maven') {
-                      sh "mvn package"
-                }
+                sh 'mvn package'
             }
         }
 
         stage ('test package') {
             steps {
                 /* test application using maven */
-                withMaven(maven: 'maven') {
-                    sh "mvn test"
-                }
+                sh 'mvn test'
             }
         }
     }
 }
-
