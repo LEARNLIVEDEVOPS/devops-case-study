@@ -28,7 +28,7 @@ node{
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
-        sh 'cp ${JENKINS_HOME}/workspace/${JOB_NAME}/target/addressbook.war .'
+        /* sh 'cp ${JENKINS_HOME}/workspace/${JOB_NAME}/target/addressbook.war .' */
         dockerImg = docker.build("juned/myapp")
     }
 
