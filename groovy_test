@@ -21,24 +21,33 @@ pipeline {
                 always {
                 /* Perform JUnit testing
                 * sh './gradlew check' */
-                    archiveArtifacts "target/**/*"
+                    archiveArtifacts "target/**/*", fingerprint: true
                     junit '**/target/*-reports/TEST-*.xml'
                 }
             }
         }
-        
-        stage ('package app') {
+
+        stage ('compile & package') {
             steps {
                 /* Package Application using maven */
                 sh 'mvn package'
             }
         }
-        
+
         stage ('sonarqube analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
                     sh 'mvn sonar:sonar'
                 }
+            }
+        }
+
+        stage ('build image') {
+
+            steps {
+                /* This builds the actual image; synonymous to
+                * docker build on the command line */
+                dockerImg = docker.build("juned/myapp")
             }
         }
     }
