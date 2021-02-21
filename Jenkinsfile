@@ -1,6 +1,6 @@
 #!/bin/groovy
 
-def dockerImg
+#def dockerImg
 
 pipeline {
     agent any
