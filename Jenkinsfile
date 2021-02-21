@@ -27,19 +27,7 @@ pipeline {
             }
         }
 
-        
-        
-        stage('Dependency Check') {
-			steps {
-				dependencyCheckAnalyzer datadir: 'dependency-check-data', includeVulnReports: true, hintsFile: '', includeCsvReports: false, includeHtmlReports: true, includeJsonReports: false, isAutoupdateDisabled: false, outdir: '', scanpath: '', skipOnScmChange: false, skipOnUpstreamChange: false, suppressionFile: '', zipExtensions: ''
-                
-    		        	dependencyCheckPublisher canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
-
-            			archiveArtifacts allowEmptyArchive: true, artifacts: '**/dependency-check-report.html'
-                
-                    		archiveArtifacts allowEmptyArchive: true, artifacts: '**/dependency-check-report.xml'
-			}
-		}
+      
         
         stage ('Compile & Package') {
             steps {
@@ -91,11 +79,11 @@ pipeline {
     post {
         success {
             echo "Send success email notification"
-            mail bcc: '', body: " Build Status : Success <br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL} <br>App URL: http://34.93.78.26/addressbook", cc: '', charset: 'UTF-8',  mimeType: 'text/html', replyTo: '', subject: "Jenkins Build Status -> ${env.JOB_NAME}", to: "jkhan6722@gmail.com";
+            mail bcc: '', body: " Build Status : Success <br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL} <br>App URL: http://34.93.78.26/addressbook", cc: '', charset: 'UTF-8',  mimeType: 'text/html', replyTo: '', subject: "Jenkins Build Status -> ${env.JOB_NAME}", to: "ramki.veda@gmail.com";
         }
         failure {
             echo "send failure email notification"
-            mail bcc: '', body: " Build Status : Failed <br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL}", cc: '', charset: 'UTF-8',  mimeType: 'text/html', replyTo: '', subject: "Jenkins Build Status -> ${env.JOB_NAME}", to: "jkhan6722@gmail.com";
+            mail bcc: '', body: " Build Status : Failed <br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL}", cc: '', charset: 'UTF-8',  mimeType: 'text/html', replyTo: '', subject: "Jenkins Build Status -> ${env.JOB_NAME}", to: "ramki.veda@gmail.com";
         }
     }
 }
