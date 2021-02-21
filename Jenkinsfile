@@ -1,7 +1,3 @@
-#!/bin/groovy
-
-#def dockerImg
-
 pipeline {
     agent any
     stages {
@@ -26,19 +22,12 @@ pipeline {
                 }
             }
         }
-
-      
-        
+  
         stage ('Compile & Package') {
             steps {
                 /* Package Application using maven */
                 sh 'mvn package'
             }
         }
-        
-        
-        
-        
-
         
 }
