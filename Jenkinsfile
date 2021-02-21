@@ -49,7 +49,7 @@ pipeline {
                 script {
                     /* This builds the actual image; synonymous to
                     * docker build on the command line */
-                    dockerImg = docker.build("juned/myapp")
+                    dockerImg = docker.build("ramkitcs/myapp")
                 }
             }
         }
